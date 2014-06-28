@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="tutorialApp">
+	<head>
+		<title>Angular Tutorial</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="http://code.angularjs.org/1.2.0-rc.2/angular.js"></script> <!-- include angularJS -->
+		<script>
+			//This tells the page we are using angular. This can and usually will be included at the very top of the controller. 
+      		var app = angular.module('tutorialApp', []); //This is the module, if you remember that term from the video.
+    	</script>
+    	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    	<script src="tutorialCtrl.js"></script> <!-- This tells the page where the controller is. -->
+	</head>
+	<body ng-controller="tutorialCtrl"> <!--This tells the page where the apply the controller to, in this case the entire body.-->
+		<div class="container-fluid">
+			<div class="row">
+				<br />
+				<div class="col-md-offset-4">
+					<label for="searchInput"><h3>Search: </h3></label>
+					<input type="text" id="searchInput" size='24'  /><!-- 	Here I would like to type any info and have it filter the results. Use ng-model="" to give us something to bind to-->
+				</div>
+				<hr>
+			</div>
+			<div class="row">
+				<div class="col-md-4 col-md-offset-2">
+					<!-- inbetween the 'strong' tags you should bind whatever the user typed into the search bar (note: binding CAN be done outside of html tags. try removing the strong tags) -->
+					<!-- Binding is done like this: {{ng-model value or scope obj}} -->
+					<h4>You Searched For: <strong></strong></h4>
+				</div>
+				<div class="col-md-4 col-md-offset-1">
+					<div class="btn-group">
+  						<!-- Here you should add some buttons that will allow you to filter by super hero type. -->
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<!-- in this div, you should loop through and list all of the superheros, maybe ng-repeat over the superhero array strored in the controller in the 'list item' tag? -->
+				<div class="col-md-offset-5">
+						<h5><strong>Superheros</strong></h5>
+						<ul class="list-unstyled">
+						<!-- To make the item actually appear in the list you will need to data bind it, similar to what you did in the span tags-->
+						<li></li>
+						<!-- if you have them showing up, try filtering by the whatever we typed into the search box -->
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<br />
+				<div class="col-md-offset-2 col-md-8">
+					<!-- in this div id like the ability to add a super hero -->
+					<h3 class="col-md-offset-4">Add Super Hero</h3>
+					<!-- you will need to add something to these two input tag -->
+					<label>Name: </label>&nbsp<input type="text" size='24'><br />
+					<label>Class: </label>&nbsp<input type="text" size='24'>
+					<!-- you will need to add something to the button tag below, try ng-click() = <NameOfYourFunction>-->
+					<button type="button" class="btn btn-primary col-md-offset-4" >Add Superhero</button>
+					<!-- this is an alert that will show if you dont fill in the name and type fields -->
+					<div ng-show="alerts" ng-click="alerts=!alerts"class="alert alert-danger ">Thats not a superhero, you face the wrath of Deathwing! (Click Me)</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
