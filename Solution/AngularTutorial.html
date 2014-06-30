@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="tutorialApp">
+	<head>
+		<title>Angular Tutorial</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="http://code.angularjs.org/1.2.0-rc.2/angular.js"></script> <!-- include angularJS -->
+		<script>
+			//This tells the page we are using angular. This can be included in the controller. 
+      		var app = angular.module('tutorialApp', []); //This is the module, if you remember that term from the video.
+    	</script>
+    	<script src="http://code.jquery.com/jquery-1.10.2.js"></script> <!-- Angular also requires jQuery. -->
+    	<!-- Notice the new Bootstrap Includes, they must come after the jQyuery includes -->
+    	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    	<script src="tutorialCtrl.js"></script> <!-- This tells the page where the controller is. -->
+	</head>
+	<body ng-controller="tutorialCtrl"> <!--This tells the page where the apply the controller to, in this case the entire body.-->
+		<div class="container-fluid">
+			<div class="row">
+				<br />
+				<div class="col-md-offset-4">
+					<label for="searchInput"><h3>Search: </h3></label>
+					<input type="text" id="searchInput" size='24' ng-model="searchTerm" /><!-- 	Here I would like to type any info and have it filter the reults-->
+				</div>
+				<hr>
+			</div>
+			<div class="row">
+				<div class="col-md-4 col-md-offset-2">
+					<!-- inbetween the 'span' tags you should bind whatever the user typed into the search bar (note: binding CAN be done outside of html tags. try removing the span tags) -->
+					<h4>You Searched For: <strong>{{searchTerm}}</strong></h4>
+				</div>
+				<div class="col-md-4 col-md-offset-1">
+					<!-- in this div, you should loop through and list all of the superheros, maybe ng-repeat over the superhero array strored in the controller in the 'list item' tag? -->
+					<div class="btn-group">
+  						<button type="button" class="btn btn-default" ng-click="types='hero'">Hero</button>
+						<button type="button" class="btn btn-default" ng-click="types=''">Both</button>
+					  	<button type="button" class="btn btn-default" ng-click="types='villian'">Villian</button>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-offset-5">
+						<h5><strong>Superheros</strong></h5>
+						<ul class="list-unstyled">
+						<!-- To make the item actually appear in the list you will need to data bind it, similar to what you did in the span tags-->
+						<li ng-repeat="s in superhero |filter:searchTerm |filter:types">{{s.name}} - {{s.type}}</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<br />
+				<div class="col-md-offset-2 col-md-8">
+					<!-- in this div id like the ability to add a super hero -->
+					<h3 class="col-md-offset-4">Add Super Hero</h3>
+					<!-- you will need to add something to this input tag -->
+					<label>Name: </label>&nbsp<input type="text" size='24' ng-model="name"><br />
+					<label>Class: </label>&nbsp<input type="text" size='24' ng-model="type">
+					<!-- you will need to add something to this button tag, try ng-click-->
+					<button type="button" class="btn btn-primary col-md-offset-4" ng-click="addSuperhero()">Add Superhero</button>
+					<!-- Once you have completed all of the above lets add some more attributes to the superhero -->
+					<!-- this will require changes to the superheros array and addSuperHero function as well as adding a few more fields for users to add this info. -->
+					<div ng-show="alerts" ng-click="alerts=!alerts"class="alert alert-danger ">Thats not a superhero, you face the wrath of Deathwing! (Click Me)</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
